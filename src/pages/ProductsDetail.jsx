@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { getProductsThunk } from '../store/slices/products.slice';
+import { getCartThunk } from '../store/slices/cart.slice';
 import '../assets/css/product.css';
 import Carousel from 'react-bootstrap/Carousel';
+import axios from 'axios';
 
 
 
@@ -23,7 +25,18 @@ const ProductsDetail = () => {
 
     const relatedProducts = productList.filter(productsItem => productsItem.category.id === product.category.id)
 
-    console.log(relatedProducts)
+
+    const [quantity, setQuantity] = useState ({})
+
+    const addToCart = () =>{
+        const item = { 
+            id: product.id,
+            quantity: quantity
+        }
+        axios.post('https://e-commerce-api.academlo.tech/api/v1/cart', item)
+        .then(res => dispatch(getCartThunk()));
+
+    }
 
 
     return (
@@ -66,13 +79,13 @@ const ProductsDetail = () => {
                             <p>Quantity</p>
                             <div className="button-quantity">
                                 <button>-</button>
-                                <p>1</p>
+                                <input type="text" name="" id="" value={quantity} onChange={e => setQuantity(e.target.value)} />
                                 <button>+</button>
                             </div>
                         </div>
                     </div>
                     <div className="add-cart">
-                        <button className='btn btn-lg btn-primary'>Add to cart <i className="fa-solid fa-cart-shopping"></i></button>
+                        <button onClick={addToCart} className='btn btn-lg btn-primary'>Add to cart <i className="fa-solid fa-cart-shopping"></i></button>
                     </div>
                 </div>
             </div>

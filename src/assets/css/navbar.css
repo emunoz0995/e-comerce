@@ -109,15 +109,3 @@
         border-left: 1px solid var(--light-gray);
     }
 }
-
-@media (min-width: 1100px) {
-    .login-modal{
-        right: 25%;
-    }
-}
-
-@media (min-width: 1300px) {
-    .login-modal{
-        right: 28%;
-    }
-}

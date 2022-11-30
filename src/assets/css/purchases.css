@@ -1,0 +1,46 @@
+.purchases {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.purchases-container {
+    background-color: rgba(64, 66, 68, 0.301);
+    width: 1000px;
+    list-style: none;
+    margin-bottom: 20px;
+    padding: 10px 10px 10px 30px;
+    border-radius: 3px;
+}
+.purchases-container a {
+text-decoration: none;
+}
+.item-purchase{
+    display: flex;
+    flex-direction: column;
+}
+.purchase-title{
+    width: 50%;
+    margin-right: 230px;
+}
+.purchase-quantity{
+    text-align: center;
+    width: 50px;
+    margin-right: 130px;
+    margin-bottom: 2px;
+   
+}
+.details-purchases{
+    display: flex;
+}
+.shopping-day{
+    width: 104%;
+    background-color: rgba(64, 66, 68, 0.301);
+    margin-top: -9px;
+    margin-left: -30px;
+    height: 30px;
+    padding-left: 20px;
+    padding-top: 2px;
+}
