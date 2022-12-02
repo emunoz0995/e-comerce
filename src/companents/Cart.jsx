@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getCartThunk } from '../store/slices/cart.slice';
+import { chekOutCartThunk, getCartThunk } from '../store/slices/cart.slice';
 import '../assets/css/cart.css';
+
+
 const Cart = ({ show, handleClose }) => {
 
     const dispatch = useDispatch();
@@ -13,6 +15,18 @@ const Cart = ({ show, handleClose }) => {
     useEffect(() => {
         dispatch(getCartThunk());
     }, [])
+
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    useEffect(() => {
+        let total = 0;
+        cart.forEach(product => {
+            total += product.price * product.productsInCart.quantity;
+        });
+        setTotalPrice(total);
+    }, [cart])
+
+
 
     return (
         <div>
@@ -25,8 +39,8 @@ const Cart = ({ show, handleClose }) => {
                     <Offcanvas.Body>
                         <ul>
                             {cart.map(item => (
-                                <li className='cart-container'>
-                                    <Link  key={item.id}>
+                                <li key={item.id} className='cart-container'>
+                                    <Link >
                                         <div className="button-brand">
                                             <p><b>{item.brand} </b> </p>
                                             <button><i className="fa-solid fa-trash-can"></i></button>
@@ -44,9 +58,9 @@ const Cart = ({ show, handleClose }) => {
                     <div className='canvas-footer'>
                         <div className="total-cart">
                             <p>Total:</p>
-                            <p>$ 25000</p>
+                            <p>$ {totalPrice}</p>
                         </div>
-                        <button className="btn btn-primary">Checkout</button>
+                        <button onClick={() => dispatch(chekOutCartThunk())} className="btn btn-primary">Checkout</button>
                     </div>
                 </Offcanvas>
             </>
@@ -54,4 +68,4 @@ const Cart = ({ show, handleClose }) => {
     );
 };
 
-export default Cart;
+export default Cart; 

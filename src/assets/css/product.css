@@ -102,10 +102,25 @@
     height: 30px;
     
 }
-.button-quantity button{
+.button-quantity input{
     text-align: center;
-    width: 30px;
-    border: 2px solid black;
+    width: 50px;
     height: 30px;
     
 }
+.buttons{
+  display: flex;
+  flex-direction: column;
+  margin-top: -10px;
+}
+.buttons button{
+    background-color: transparent;
+    border: none;
+    
+  }
+
+  .buttons button:hover{
+ color: #e83283;
+    
+  }
+

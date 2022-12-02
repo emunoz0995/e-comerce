@@ -42,8 +42,8 @@ const Login = () => {
                     <div className="test">
                         <h3>Test data</h3>
                         <div className="data">
-                            <p><i class="fa-sharp fa-solid fa-envelope"></i>  john@gmail.com</p>
-                            <p><i class="fa-solid fa-unlock-keyhole"></i> john1234</p>
+                            <p><i className="fa-sharp fa-solid fa-envelope"></i>  john@gmail.com</p>
+                            <p><i className="fa-solid fa-unlock-keyhole"></i> john1234</p>
                         </div>
 
                     </div>

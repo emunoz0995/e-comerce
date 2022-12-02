@@ -14,6 +14,12 @@ const Purchases = () => {
         dispatch(getPurchasesThunk());
     }, [])
 
+    const getFormateDate = (dateString) =>{
+        const date = new Date(dateString);
+        const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+        return date.toLocaleDateString(undefined, options);
+    }
+
 
     console.log(purchases)
     return (
@@ -28,7 +34,7 @@ const Purchases = () => {
                 {purchases.map(purchase => (
                     <li className='purchases-container' key={purchase.id}>
                         <div className="shopping-day">
-                                    <p>{purchase.createdAt}</p>
+                                    <p>{getFormateDate(purchase.createdAt)}</p>
                                 </div>
                         {purchase.cart?.products.map(product => (
                             <Link className='item-purchase' key={product.id} to={`/product/${product.id}`}>

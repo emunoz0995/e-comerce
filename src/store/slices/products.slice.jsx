@@ -8,6 +8,10 @@ export const productsSlice = createSlice({
     reducers: {
         setProducts: (state, action) => {
             return action.payload
+        },
+        filterPrice: (state, action) => {
+            const {fromPrice, toPrice} = action.payload;
+            return state.filter(product => product.price > fromPrice && product.price < toPrice)
         }
     }
 })
@@ -36,6 +40,6 @@ export const filterThunk = (imputSearch) => dispatch => {
 
 
 
-export const { setProducts } = productsSlice.actions;
+export const { setProducts, filterPrice } = productsSlice.actions;
 
 export default productsSlice.reducer;

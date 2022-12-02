@@ -21,6 +21,13 @@ export const getCartThunk = () => dispatch => {
         .finally(() => dispatch(setIsLoading(false)))
 }
 
+export const chekOutCartThunk = () => dispatch => {
+    dispatch(setIsLoading(true));
+    axios.post('https://e-commerce-api.academlo.tech/api/v1/purchases', {}, getConfig())
+        .then(res => dispatch(setCart([])))
+        .finally(() => dispatch(setIsLoading(false)))
+}
+
 export const { setCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

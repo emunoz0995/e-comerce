@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import { useDispatch } from 'react-redux';
-import { filterProductsThunk, filterThunk, getProductsThunk } from '../store/slices/products.slice';
+import { filterPrice, filterProductsThunk, filterThunk, getProductsThunk } from '../store/slices/products.slice';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -22,25 +22,13 @@ const SearchForm = () => {
 
     const dispatch = useDispatch();
 
+    const [fromPrice, setFromPrice] = useState("");
+    const [toPrice, setToPrice] = useState("");
+
 
 
     return (
         <>
-            <Accordion defaultActiveKey={['1']} alwaysOpen>
-                <Accordion.Item eventKey="1">
-                    <Accordion.Header>Search by Category</Accordion.Header>
-                    <Accordion.Body>
-                        <ul>
-                            {categoriesList.map(category => (
-                                <Link className='filter' key={category.id} onClick={() => dispatch(filterProductsThunk(category.id))}>
-                                    {category.name}
-                                </Link>
-                            ))}
-                        </ul>
-                    </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
-
             <InputGroup className="mb-3 searching">
                 <Form.Control
                     placeholder="Search.."
@@ -52,6 +40,49 @@ const SearchForm = () => {
                     <i className="fa-solid fa-magnifying-glass"></i>
                 </Button>
             </InputGroup>
+            <Accordion defaultActiveKey={['1']} alwaysOpen>
+                <Accordion.Item eventKey="1">
+                    <Accordion.Header>Category</Accordion.Header>
+                    <Accordion.Body>
+                        <ul>
+                            {categoriesList.map(category => (
+                                <Link className='filter' key={category.id} onClick={() => dispatch(filterProductsThunk(category.id))}>
+                                    {category.name}
+                                </Link>
+                            ))}
+                        </ul>
+                    </Accordion.Body>
+                </Accordion.Item>
+            </Accordion>
+            <br />
+            <Accordion defaultActiveKey={['1']} alwaysOpen>
+                <Accordion.Item eventKey="1">
+                    <Accordion.Header>Price</Accordion.Header>
+                    <Accordion.Body>
+                        <InputGroup size="sm" className="mb-3">
+                            <InputGroup.Text id="inputGroup-sizing-sm">From</InputGroup.Text>
+                            <Form.Control
+                                aria-label="Small"
+                                aria-describedby="inputGroup-sizing-sm"
+                                value={fromPrice} 
+                                onChange={e => setFromPrice(e.target.value)}
+                            />
+                        </InputGroup>
+                        <InputGroup size="sm" className="mb-3">
+                            <InputGroup.Text id="inputGroup-sizing-sm">To</InputGroup.Text>
+                            <Form.Control
+                                aria-label="Small"
+                                aria-describedby="inputGroup-sizing-sm"
+                                value={toPrice} 
+                                onChange={e => setToPrice(e.target.value)}
+                            />
+                        </InputGroup>
+                        <button onClick={() => dispatch(filterPrice({fromPrice, toPrice}))} className="btn btn-primary">Search</button>
+                    </Accordion.Body>
+                </Accordion.Item>
+            </Accordion>
+
+
         </>
     );
 };
