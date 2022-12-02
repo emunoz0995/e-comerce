@@ -77,7 +77,7 @@ const SearchForm = () => {
                                 onChange={e => setToPrice(e.target.value)}
                             />
                         </InputGroup>
-                        <button onClick={() => dispatch(filterPrice({fromPrice, toPrice}))} className="btn btn-primary">Search</button>
+                        <button onClick={() => dispatch(filterPrice({fromPrice, toPrice}))} className="btn btn-primary button-login">Search</button>
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>

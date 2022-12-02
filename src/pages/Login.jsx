@@ -56,8 +56,8 @@ const Login = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password"  {...register("password")} />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
+                <Button className='button-login'variant="primary" type="submit">
+                    Log In
                 </Button>
             </Form>
         </div>

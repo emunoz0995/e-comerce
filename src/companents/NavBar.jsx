@@ -2,16 +2,25 @@ import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../assets/css/navbar.css';
-import Offcanvas from 'react-bootstrap/Offcanvas';
 import Cart from './Cart';
 
 const NavBar = () => {
     const [show, setShow] = useState(false);
 
+    const navigate = useNavigate();
+
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        const token = localStorage.getItem('token');
+        if(token){
+            setShow(true);
+        } else {
+            navigate('/login');
+        }
+    }
+        
 
     return (
         <div className='navbar'>
